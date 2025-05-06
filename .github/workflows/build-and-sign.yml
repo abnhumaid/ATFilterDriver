@@ -1,0 +1,44 @@
+name: Build, Catalog & Sign Driver
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-sign:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up WDK environment
+      shell: cmd
+      run: |
+        call "C:\Program Files (x86)\Windows Kits\10\BuildEnv\SetEnv.cmd" /x64
+
+    - name: Build driver
+      shell: cmd
+      run: build
+
+    - name: Generate catalog
+      shell: cmd
+      run: '"C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\Inf2Cat.exe" /driver:"%GITHUB_WORKSPACE%" /os:10_X64'
+
+    - name: Sign catalog
+      shell: cmd
+      run: signtool sign /a /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 ATFilter.cat
+
+    - name: Sign driver
+      shell: cmd
+      run: signtool sign /a /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 objfre_x64\ATFilter.sys
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ATFilterDriver-Package
+        path: |
+          ATFilter.inf
+          ATFilter.cat
+          objfre_x64\ATFilter.sys
+          ATFilter.manifest
