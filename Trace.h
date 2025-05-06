@@ -1,0 +1,3 @@
+#define WPP_CONTROL_GUIDS \
+    WPP_DEFINE_CONTROL_GUID(ATFilterTraceGuid, (b1c0ffee, 1234, 5678, abcd, 1234567890ab), \
+    WPP_DEFINE_BIT(TRACE_DRIVER))

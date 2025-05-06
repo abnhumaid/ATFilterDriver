@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instrumentationManifest 
+    xmlns="http://schemas.microsoft.com/win/2004/08/events"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/events"
+    xmlns:vl="http://manifests.microsoft.com/win/2004/08/events/vocab"
+    xmlns:ev="http://manifests.microsoft.com/win/2004/08/events">
+  <instrumentation>
+    <events>
+      <provider name="ATFilterDriver"
+                guid="{b1c0ffee-1234-5678-abcd-1234567890ab}"
+                symbol="ATFilterTraceGuid"
+                resourceFileName="ATFilter.dll"
+                messageFileName="ATFilter.dll"
+                templateFileName="ATFilter.tpl"
+                inSetup="true"
+                localizationResourcesRef="messageResources"/>
+      <channel name="ATFilterChannel"
+               type="Operational"
+               enabled="true"
+               isolation="application"
+               accessControl="O:BAG:SYD:(A;;0xf0007;;;SY)"/>
+    </events>
+  </instrumentation>
+</instrumentationManifest>

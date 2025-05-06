@@ -1,0 +1,5 @@
+; Placeholder ATFilter.cat
+; To generate a valid catalog file, run:
+; Inf2Cat.exe /driver:"<path_to_driver_folder>" /os:10_X64
+; Then sign the resulting ATFilter.cat:
+; signtool sign /a /fd SHA256 ATFilter.cat

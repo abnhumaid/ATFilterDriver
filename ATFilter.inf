@@ -1,0 +1,10 @@
+[Version]
+Signature="$WINDOWS NT$"
+
+[MyFilter_Service_Inst]
+LoadOrderGroup = "Filter"
+AddReg = UpperFilters_AddReg
+
+[UpperFilters_AddReg]
+HKR,ParentService,,"Serial"
+HKR,,UpperFilters,0x00010008,"ATFilterDriver"
